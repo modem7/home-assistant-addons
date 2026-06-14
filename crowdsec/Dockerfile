@@ -1,5 +1,5 @@
 # This is an alias stage so that --from=crowdsec works
-ARG CROWDSEC_VERSION=v1.7.7
+ARG CROWDSEC_VERSION=v1.7.8
 ARG BUILD_FROM
 
 FROM crowdsecurity/crowdsec:${CROWDSEC_VERSION} AS crowdsec
@@ -72,6 +72,7 @@ COPY --from=crowdsec /staging/etc/crowdsec/notifications/splunk.yaml /etc/crowds
 RUN mkdir -p /staging/var/lib/crowdsec/data/ && touch /staging/var/lib/crowdsec/data/crowdsec.db
 # workaround to avoid having build issue ("failed to create image: failed to get layer")
 RUN true
+
 COPY --from=crowdsec /usr/local/lib/crowdsec/plugins /usr/local/lib/crowdsec/plugins
 
 # Copy root filesystem
